@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AleksPinedaApp</string>
+    <string name="action_settings">configuracion de accion</string>
+    <string name="first_fragment_label">etiqueta del primer fragmento</string>
+    <string name="second_fragment_label">etiqueta dell segundo fragmento</string>
+    <string name="next">proxima</string>
+    <string name="previous">Previa</string>
+    <string name="title_activity_main">Titulo actividad principal</string>
+</resources>

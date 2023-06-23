@@ -13,16 +13,19 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import hn.uth.alekspinedaapp.adapter.MedicamentosAdapter;
 import hn.uth.alekspinedaapp.databinding.ActivityMainBinding;
-
-import android.view.Menu;
-import android.view.MenuItem;
+import hn.uth.alekspinedaapp.entity.Medicamento;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+    private MedicamentosAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,46 +36,34 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        List<Medicamento> listadoMedicamentos = new ArrayList<>();
+        listadoMedicamentos.add(new Medicamento("Aspirina", "20 lps", "Ácido acetilsalicílico"));
+        listadoMedicamentos.add(new Medicamento("Espidifen", "50 lps", "Ibuprofeno"));
+        listadoMedicamentos.add(new Medicamento("Apiretal", "30 lps", "Paracetamol"));
+        listadoMedicamentos.add(new Medicamento("Metalgial", "25 lps", "Metamizol"));
+        listadoMedicamentos.add(new Medicamento("Clamoxyl", "40 lps", "Amoxicilina"));
+        listadoMedicamentos.add(new Medicamento("Dolotren", "45 lps", "Diclofenaco"));
+        listadoMedicamentos.add(new Medicamento("Adofen", "15 lps", "Fluoxetina"));
+        listadoMedicamentos.add(new Medicamento("Valium", "10 lps", "Diazepam"));
+        listadoMedicamentos.add(new Medicamento("Nolotil", "40 lps", "Metamizol"));
+        listadoMedicamentos.add(new Medicamento("Algidol", "50 lps", "Paracetamol"));
+        listadoMedicamentos.add(new Medicamento("Ativan", "55 lps", "Lorazepam"));
+        listadoMedicamentos.add(new Medicamento("Rivotril", "30 lps", "Clonazepam"));
+        listadoMedicamentos.add(new Medicamento("Artrotec", "40 lps", "Diclofenaco"));
+        listadoMedicamentos.add(new Medicamento("Luramon", "20 lps", "Fluoxetina"));
+        listadoMedicamentos.add(new Medicamento("Adolonta", "30 lps", "Tramadol"));
+        listadoMedicamentos.add(new Medicamento("Omeprazol ", "35 lps", "Omeprazol "));
+        listadoMedicamentos.add(new Medicamento("Lorazepam ", "45 lps", "Lorazepam"));
+        listadoMedicamentos.add(new Medicamento("Orfidal", "25 lps", "Lorazepam"));
+        listadoMedicamentos.add(new Medicamento("Prednisona ", "20 lps", "Prednisona"));
+        listadoMedicamentos.add(new Medicamento("Metformina ", "30 lps", "Metformina"));
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
-            }
-        });
+        adapter = new MedicamentosAdapter(listadoMedicamentos);
+        setupRecyclerView();
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
+    private void setupRecyclerView(){
+        LinearLayoutManager linearLayout = new LinearLayoutManager(this.getApplicationContext());
+        binding.contentMed.rvDatos.setLayoutManager(linearLayout);
+        binding.contentMed.rvDatos.setAdapter(adapter);
     }
 }
